@@ -26,7 +26,7 @@ class Sets:
     U = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # universum set
     U_bite = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] # universum set in bites
 
-    def bite_scale(self):
+    def byte_scale(self): # translate into the byte_scale
         bite_scale = []
         j = 0 # iter for universum set
         while j < len(Sets.U):
@@ -48,8 +48,8 @@ class Sets:
         return bite_scale 
     
     def union(self, other):
-        bite_A = self.bite_scale()
-        bite_B = other.bite_scale()
+        bite_A = self.byte_scale()
+        bite_B = other.byte_scale()
 
         result = [0] * len(bite_B)
 
@@ -63,8 +63,8 @@ class Sets:
         return
     
     def intersect(self, other):
-        bite_A = self.bite_scale()
-        bite_B = other.bite_scale()
+        bite_A = self.byte_scale()
+        bite_B = other.byte_scale()
 
         result = [0] * len(bite_B)
         for i in range(len(bite_B)):
@@ -86,8 +86,8 @@ class Sets:
             return
 
     def substract(self, other):
-        bite_A = self.bite_scale()
-        bite_B = other.bite_scale()
+        bite_A = self.byte_scale()
+        bite_B = other.byte_scale()
 
         result = [0] * len(bite_A)
         for i in range(len(bite_A)):
@@ -95,7 +95,6 @@ class Sets:
                 result[i] = 0
             else:
                 result[i] = bite_A[i]
-        
             
             
         is_empty = True
@@ -111,7 +110,7 @@ class Sets:
             return
         
     def addition(self):
-        bite_A = self.bite_scale()
+        bite_A = self.byte_scale()
         result = [0] * len(bite_A)
 
         for i in range(len(bite_A)):
@@ -129,6 +128,25 @@ class Sets:
         else:
             print(f'result of addition A = {self.lists} is {decode(result)}')
             return
+        
+    # print all of subset of current set
+    def all_subset(self):
+        byte = self.byte_scale()
+        subsets = []
+        count = 0
+
+        for i in range(1 << len(byte)): 
+            subset = []
+            for j in range(len(byte)):  
+                if (i >> j) & 1:
+                    subset.append(self.lists[j])
+            subsets.append(subset)
+            count += 1
+
+
+        print(f'Start set = {self.lists} and his all subsets are {subsets} and count = {count}')
+
+        
         
 
 
