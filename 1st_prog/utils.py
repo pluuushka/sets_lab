@@ -130,21 +130,40 @@ class Sets:
             return
         
     # print all of subset of current set
-    def all_subset(self):
-        byte = self.byte_scale()
-        subsets = []
-        count = 0
-
-        for i in range(1 << len(byte)): 
-            subset = []
-            for j in range(len(byte)):  
-                if (i >> j) & 1:
-                    subset.append(self.lists[j])
-            subsets.append(subset)
-            count += 1
+    @staticmethod
+    def all_subset(n):
+        for i in range(2**n):
+            yield i
 
 
-        print(f'Start set = {self.lists} and his all subsets are {subsets} and count = {count}')
+    # Gray's code
+    @staticmethod
+    def gray(n):
+        B = [0] * n
+        result = [B.copy]
+        
+
+        def Q(i):
+            if (i % 2 != 0):
+                return 1
+            
+            q = 1
+            j = i
+            while j % 2 == 0:
+                j = j // 2
+                q += 1
+
+            return q
+
+        for i in range(1, 2 **n):
+            p = Q(i) - 1
+            B[p] = 1 - B[p]
+            result.append(B)
+
+        print(f'grays code = {list(result)}')
+
+
+
 
         
         

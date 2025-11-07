@@ -18,5 +18,10 @@ I.addition()
 L = Sets([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 L.addition()
 
+n = int(input("enter the n (for generation of all subsets and gray's code) = "))
 
-L.all_subset()
+print (" ====== ALL OF SUBSETS ======")
+subs = Sets.all_subset(n)
+print(list(subs))
+print (" ====== THE END OF ALL OF SUBSETS ======")
+Sets.gray(n)
